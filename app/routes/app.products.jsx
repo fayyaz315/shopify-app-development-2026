@@ -198,6 +198,7 @@ export default function Products() {
           <s-table-header-row>
             <s-table-header listSlot="primary">Product</s-table-header>
             <s-table-header>Status</s-table-header>
+            <s-table-header format="numeric">Variants</s-table-header>
             <s-table-header format="numeric">Inventory</s-table-header>
             <s-table-header format="currency">Price</s-table-header>
             <s-table-header>Vendor</s-table-header>
@@ -210,12 +211,13 @@ export default function Products() {
                   <s-stack direction="inline" gap="small-200" alignItems="center">
                     <s-thumbnail size="small" alt={p.title}
                                  src={p.featuredMedia?.preview?.image?.url || undefined} />
-                    <s-text type="strong">{p.title}</s-text>
+                    <s-link href={`/app/products/${p.id.split("/").pop()}`}>{p.title}</s-link>
                   </s-stack>
                 </s-table-cell>
                 <s-table-cell>
                   <s-badge tone={STATUS_TONE[p.status]}>{p.status.toLowerCase()}</s-badge>
                 </s-table-cell>
+                <s-table-cell>{p.variantsCount.count}</s-table-cell>
                 <s-table-cell>{p.totalInventory}</s-table-cell>
                 <s-table-cell>{money(p.priceRangeV2.minVariantPrice)}</s-table-cell>
                 <s-table-cell>{p.vendor}</s-table-cell>
