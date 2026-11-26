@@ -11,7 +11,7 @@ Every episode has a git tag, so you can open the exact code from the video you w
 | 01 | [How to Create a Shopify App in 2026 (Shopify CLI Step by Step)](https://youtu.be/gFDLhovNQ-E) | [`ep01`](../../tree/ep01) | App from the Shopify CLI template, running on a dev store |
 | 02 | [Shopify Admin API Tutorial 2026: Create, Read, Update & Delete Products](https://youtu.be/KLpa2syFpjY) | [`ep02`](../../tree/ep02) | `app/routes/app.products.jsx`: list, search, paginate, create, edit and delete products |
 | 03 | [Shopify Product Variants API 2026: Add Options, Create, Update & Delete Variants](https://youtu.be/LpRh5aq8WW0) | [`ep03`](../../tree/ep03) | `app/routes/app.products_.$id.jsx`: options (productOptionsCreate/Delete) + variants bulk create, update (price + SKU), delete; products table links to it |
-| 04 | Shopify GraphQL Create Collection 2026: Smart & Manual Collections API in Your App (video soon) | [`ep04`](../../tree/ep04) | `app/routes/app.collections.jsx` + `app.collections_.$id.jsx` + `app/components/conditions.jsx`: manual + smart collections with the 2026-10 sources model (conditions, hand-picked products via the resource picker, exclusions), rename, delete |
+| 04 | [Shopify GraphQL Create Collection 2026: Smart & Manual Collections API in Your App](https://youtu.be/zE8Mrt3uh8s) | [`ep04`](../../tree/ep04) | `app/routes/app.collections.jsx` + `app.collections_.$id.jsx` + `app/components/conditions.jsx`: manual + smart collections with the 2026-10 sources model (conditions, hand-picked products via the resource picker, exclusions), rename, delete |
 
 ## Run it on your own dev store
 
