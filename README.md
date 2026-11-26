@@ -9,7 +9,7 @@ Every episode has a git tag, so you can open the exact code from the video you w
 | Episode | Video | Tag | What it adds |
 |---|---|---|---|
 | 01 | [How to Create a Shopify App in 2026 (Shopify CLI Step by Step)](https://youtu.be/gFDLhovNQ-E) | [`ep01`](../../tree/ep01) | App from the Shopify CLI template, running on a dev store |
-| 02 | Shopify Admin API Tutorial 2026: Create, Read, Update & Delete Products | [`ep02`](../../tree/ep02) | `app/routes/app.products.jsx`: list, search, paginate, create, edit and delete products |
+| 02 | [Shopify Admin API Tutorial 2026: Create, Read, Update & Delete Products](https://youtu.be/KLpa2syFpjY) | [`ep02`](../../tree/ep02) | `app/routes/app.products.jsx`: list, search, paginate, create, edit and delete products |
 
 ## Run it on your own dev store
 
