@@ -124,7 +124,8 @@ export default function Fulfillments() {
         <s-stack gap="large">
           {toShip.length === 0 && <s-paragraph>Nothing to ship.</s-paragraph>}
           {toShip.map((o) => o.fos.map((fo) => (
-            <form key={fo.id} onSubmit={submit("fulfill", { foId: fo.id })}>
+            // key includes what's left, so the form resets after each shipment (fresh quantities)
+            <form key={`${fo.id}-${fo.items.map((i) => i.remainingQuantity).join("-")}`} onSubmit={submit("fulfill", { foId: fo.id })}>
               <s-stack gap="small">
                 <s-heading>{o.name} · {o.customer} <s-badge tone={o.status === "PARTIALLY_FULFILLED" ? "warning" : undefined}>{o.status.toLowerCase().replaceAll("_", " ")}</s-badge></s-heading>
                 <s-text color="subdued">Ships from {fo.location}</s-text>
