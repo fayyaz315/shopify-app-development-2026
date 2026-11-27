@@ -18,12 +18,10 @@ const FO = `fulfillmentOrders(first: 5) {
 }`;
 const QUERY = `#graphql
   query Fulfillments {
-    toShip: orders(first: 5, sortKey: CREATED_AT, reverse: true, query: "fulfillment_status:unshipped OR fulfillment_status:partial") {
-      nodes { id name displayFulfillmentStatus customer { displayName } ${FO} }
-    }
-    shipped: orders(first: 4, sortKey: UPDATED_AT, reverse: true, query: "fulfillment_status:shipped OR fulfillment_status:partial") {
+    orders(first: 8, sortKey: CREATED_AT, reverse: true) {
       nodes {
-        id name
+        id name displayFulfillmentStatus customer { displayName }
+        ${FO}
         fulfillments(first: 5) { id status createdAt trackingInfo { company number url } fulfillmentLineItems(first: 5) { nodes { quantity lineItem { name } } } }
       }
     }
@@ -32,15 +30,18 @@ const QUERY = `#graphql
 export const loader = async ({ request }) => {
   const { admin } = await authenticate.admin(request);
   const { data } = await (await admin.graphql(QUERY)).json();
+  // The latest orders, filtered here: a search filter like fulfillment_status:partial lags a few seconds behind a new shipment
+  const orders = data.orders.nodes;
   return {
-    toShip: data.toShip.nodes.map((o) => ({
+    toShip: orders.map((o) => ({
       id: o.id, name: o.name, status: o.displayFulfillmentStatus, customer: o.customer?.displayName ?? "—",
       // only fulfillment orders that can still be fulfilled
       fos: o.fulfillmentOrders.nodes.filter((f) => ["OPEN", "IN_PROGRESS"].includes(f.status))
-        .map((f) => ({ id: f.id, location: f.assignedLocation.name, items: f.lineItems.nodes.filter((i) => i.remainingQuantity > 0) })),
-    })),
+        .map((f) => ({ id: f.id, location: f.assignedLocation.name, items: f.lineItems.nodes.filter((i) => i.remainingQuantity > 0) }))
+        .filter((f) => f.items.length),
+    })).filter((o) => o.fos.length),
     // Shopify lists an order's fulfillments newest first; we show them in the order they were shipped
-    shipped: data.shipped.nodes.flatMap((o) => o.fulfillments.filter((f) => f.status === "SUCCESS")
+    shipped: orders.flatMap((o) => o.fulfillments.filter((f) => f.status === "SUCCESS")
       .sort((a, b) => a.createdAt.localeCompare(b.createdAt)).map((f) => ({ ...f, order: o.name }))),
   };
 };
