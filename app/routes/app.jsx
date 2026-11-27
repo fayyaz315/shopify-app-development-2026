@@ -29,6 +29,7 @@ export default function App() {
         <s-link href="/app/languages">Languages</s-link>
         <s-link href="/app/shipping">Shipping</s-link>
         <s-link href="/app/customers">Customers</s-link>
+        <s-link href="/app/orders">Orders</s-link>
         <s-link href="/app/additional">Additional page</s-link>
       </s-app-nav>
       <Outlet />
