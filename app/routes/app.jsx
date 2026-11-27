@@ -22,6 +22,7 @@ export default function App() {
         <s-link href="/app/inventory">Inventory</s-link>
         <s-link href="/app/discounts">Discounts</s-link>
         <s-link href="/app/metafields">Metafields</s-link>
+        <s-link href="/app/metaobjects">Metaobjects</s-link>
         <s-link href="/app/additional">Additional page</s-link>
       </s-app-nav>
       <Outlet />
