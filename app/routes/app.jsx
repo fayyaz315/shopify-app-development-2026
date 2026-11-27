@@ -26,6 +26,7 @@ export default function App() {
         <s-link href="/app/webhooks">Webhooks</s-link>
         <s-link href="/app/files">Files</s-link>
         <s-link href="/app/content">Content</s-link>
+        <s-link href="/app/languages">Languages</s-link>
         <s-link href="/app/additional">Additional page</s-link>
       </s-app-nav>
       <Outlet />
