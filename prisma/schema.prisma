@@ -32,3 +32,16 @@ model Session {
   refreshToken        String?
   refreshTokenExpires DateTime?
 }
+
+// Episode 9: every webhook / event the app receives (eventId is the same on every retry → no duplicates)
+model WebhookEvent {
+  eventId     String   @id
+  webhookId   String
+  shop        String
+  topic       String
+  summary     String
+  payload     String
+  triggeredAt String?
+  receivedAt  DateTime @default(now())
+  deliveries  Int      @default(1)
+}

@@ -34,7 +34,7 @@ name = "Description"
 type = "multi_line_text_field"
 
 [webhooks]
-api_version = "2027-01"
+api_version = "2026-10"
 
   [[webhooks.subscriptions]]
   uri = "/webhooks/app/uninstalled"
@@ -43,6 +43,11 @@ api_version = "2027-01"
   [[webhooks.subscriptions]]
   uri = "/webhooks/app/scopes_update"
   topics = [ "app/scopes_update" ]
+
+  # Episode 9: one URL, two topics. Shopify signs every request (HMAC) and retries if we don't answer 200.
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/catalog"
+  topics = [ "products/create", "products/delete" ]
 
 [events]
 api_version = "2026-10"
@@ -54,19 +59,19 @@ api_version = "2026-10"
   triggers = [ "product.variants.price", "product.variants.compareAtPrice" ]
   uri = "/webhooks/products/update"
   query = """
-  query product_variant_price_change($productId: ID!, $variantsId: ID!) {\r
-    product(id: $productId) {\r
-      id\r
-      title\r
-      status\r
-    }\r
-    productVariant(id: $variantsId) {\r
-      id\r
-      title\r
-      price\r
-      compareAtPrice\r
-    }\r
-  }\r
+  query product_variant_price_change($productId: ID!, $variantsId: ID!) {
+    product(id: $productId) {
+      id
+      title
+      status
+    }
+    productVariant(id: $variantsId) {
+      id
+      title
+      price
+      compareAtPrice
+    }
+  }
   """
   query_filter = "product.status:'ACTIVE'"
 
@@ -76,3 +81,4 @@ redirect_urls = [ "https://example.com/api/auth" ]
 [build]
 include_config_on_deploy = true
 automatically_update_urls_on_dev = true
+
