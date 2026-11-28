@@ -1,0 +1,4 @@
+.msh-bar { position: fixed; left: 0; right: 0; z-index: 2147483000; padding: 12px 16px; text-align: center;
+  background: var(--msh-bg); color: var(--msh-fg); font-weight: 700; font-size: 15px; }
+.msh-bar--top { top: 0; }
+.msh-bar--bottom { bottom: 0; }

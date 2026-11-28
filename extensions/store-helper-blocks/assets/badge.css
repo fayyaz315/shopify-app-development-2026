@@ -1,0 +1,3 @@
+.msh-badge { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 12px 0; padding: 10px 16px; border-radius: 999px;
+  background: var(--msh-bg); color: var(--msh-fg); font-weight: 700; font-size: 15px; line-height: 1.2; }
+.msh-badge__stock { padding: 3px 10px; border-radius: 999px; background: rgba(255, 255, 255, 0.22); }

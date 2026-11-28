@@ -1,0 +1,31 @@
+{% comment %}
+  Episode 18: an APP BLOCK. The merchant adds it to the product page in the theme editor (or through our deep link).
+  It never edits the theme's code: Shopify renders it inside a section that accepts "@app" blocks.
+{% endcomment %}
+{%- assign variant = product.selected_or_first_available_variant -%}
+{%- assign left = variant.inventory_quantity -%}
+
+<div class="msh-badge" style="--msh-bg: {{ block.settings.background }}; --msh-fg: {{ block.settings.text_color }};" {{ block.shopify_attributes }}>
+  <span class="msh-badge__text">{{ block.settings.text | escape }}</span>
+
+  {%- comment -%} Live data: the stock our app manages (Episode 5), read straight from Liquid {%- endcomment -%}
+  {%- if block.settings.show_stock and variant.inventory_management == 'shopify' and left > 0 and left <= block.settings.low_stock -%}
+    <span class="msh-badge__stock">Only {{ left }} left</span>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Product badge",
+  "target": "section",
+  "enabled_on": { "templates": ["product"] },
+  "stylesheet": "badge.css",
+  "settings": [
+    { "type": "text", "id": "text", "label": "Badge text", "default": "Free shipping over $50" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#008060" },
+    { "type": "color", "id": "text_color", "label": "Text colour", "default": "#ffffff" },
+    { "type": "checkbox", "id": "show_stock", "label": "Show low stock", "default": true },
+    { "type": "range", "id": "low_stock", "label": "Low stock below", "min": 1, "max": 50, "step": 1, "default": 10 }
+  ]
+}
+{% endschema %}

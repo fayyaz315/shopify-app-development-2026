@@ -1,0 +1,22 @@
+{% comment %}
+  Episode 18: an APP EMBED (target "body"). It works on any theme, even one without "@app" blocks:
+  the merchant switches it on under Theme settings → App embeds, and Shopify adds it to every page.
+{% endcomment %}
+<div class="msh-bar msh-bar--{{ block.settings.position }}" style="--msh-bg: {{ block.settings.background }}; --msh-fg: {{ block.settings.text_color }};">
+  {{ block.settings.text | escape }}
+</div>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "target": "body",
+  "stylesheet": "bar.css",
+  "settings": [
+    { "type": "text", "id": "text", "label": "Text", "default": "Winter sale: 20% off everything" },
+    { "type": "select", "id": "position", "label": "Position", "default": "bottom",
+      "options": [{ "value": "top", "label": "Top" }, { "value": "bottom", "label": "Bottom" }] },
+    { "type": "color", "id": "background", "label": "Background", "default": "#111111" },
+    { "type": "color", "id": "text_color", "label": "Text colour", "default": "#ffffff" }
+  ]
+}
+{% endschema %}
