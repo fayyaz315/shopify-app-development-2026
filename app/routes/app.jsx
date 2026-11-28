@@ -31,6 +31,7 @@ export default function App() {
         <s-link href="/app/customers">Customers</s-link>
         <s-link href="/app/orders">Orders</s-link>
         <s-link href="/app/fulfillments">Fulfillments</s-link>
+        <s-link href="/app/themes">Themes</s-link>
         <s-link href="/app/additional">Additional page</s-link>
       </s-app-nav>
       <Outlet />
